@@ -14,7 +14,7 @@ func lotus(wg *sync.WaitGroup) {
 	defer wg.Done()
 	for {
 		if dir == "" {
-			if _, err := os.Stat("lotus.zsh"); err == nil {
+			if _, err := os.Stat("lotus.sh"); err == nil {
 				currentDir, err := os.Getwd()
 				if err != nil {
 					fmt.Println("Error getting working directory:", err)
@@ -23,14 +23,14 @@ func lotus(wg *sync.WaitGroup) {
 
 				dir = currentDir
 
-				cmd := exec.Command("zsh", "./lotus.zsh")
+				cmd := exec.Command("sh", "./lotus.sh")
 				cmd.Stdout = os.Stdout
 				cmd.Stderr = os.Stderr
 				if err := cmd.Run(); err != nil {
-					fmt.Println("Error running lotus.zsh:", err)
+					fmt.Println("Error running lotus.sh:", err)
 				}
 			} else if !os.IsNotExist(err) {
-				fmt.Println("Error checking lotus.zsh:", err)
+				fmt.Println("Error checking lotus.sh:", err)
 			}
 		} else {
 			return
